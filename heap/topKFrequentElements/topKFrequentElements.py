@@ -1,19 +1,19 @@
 import heapq
-def topKFrequent(nums, k):
-    dict, ans = {}, []
 
-    # Make dictionary to keep hash table of value counts in num
+def topKFrequent(nums, k):
+    ans = []
+    dict = {}
+
     for num in nums: 
-        if num not in dict:
+        if num not in dict: 
             dict[num] = 1
-        else:
+        else: 
             dict[num] += 1
 
-    # Push to heap
-    for key, value in dict.items():
+    for key, val in dict.items():
         if len(ans) < k:
-            heapq.heappush(ans, [-value, key]) # negative value since python default is minheap
-        else:
-            heapq.heappushpop(ans, [-value, key])
+            heapq.heappush(ans, [val, key])
+        else: 
+            heapq.heappushpop(ans, [val, key])
 
-    return (key for value, key in ans) # return only key from value key pairs
+    return [key for value, key in ans]
